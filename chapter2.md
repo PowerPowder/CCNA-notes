@@ -6,18 +6,13 @@
 * **IEEE**
 * **WLAN**
 * **Ethernet frame**
-* **10BASE-T**
-* **100BASE-T**
-* **1000BASE-T**
-* **Fast Ethernet**
-* **Gigabit Ethernet**
 * **Ethernet link**
 * **RJ-45**
 * **Ethernet port**
 * **NIC**
 * **Straight-through cable**
 * **Crossover cable**
-* **Ethernet address**
+* **Ethernet address**: aka MAC address
 * **MAC address**
 * **Unicast address**
 * **Broadcast address**
@@ -51,7 +46,9 @@ Ethernet frames use the same format for the header and trailer no matter the spe
 
 UTP cables are twisted to prevent EMI (crosstalk - EMI from a wire to another wire in the same cable).
 
-SFP (Small Form Factor Pluggable): on switch ports where you decide what interface you want - SFP is like USB-C and the SFP modules are the adapters/dongles.
+SFP (Small Form-factor Pluggable): on switch ports where you decide what interface you want - SFP is like USB-C and the SFP modules are the adapters/dongles.
+
+### Straight-Through and Crossover Cables
 
 <div style="text-align: center">
     <br>
@@ -76,3 +73,85 @@ SFP (Small Form Factor Pluggable): on switch ports where you decide what interfa
 1000BASE-T uses 1,2 & 3,6 and 4,5 & 7,8 - with a crossover cable 1,2 and 3,6 are swapped, 4,5 and 7,8 are swapped.
 
 Cisco switches have *auto-mdix* which if the wrong cable is used, it changes it's logic to make the link work.
+
+### Single/Multi Mode Fibre
+
+<div style="text-align: center">
+    <br>
+    <img src="images/sm-fibre.png" width="450px" alt="Transmision on Singlemode Fibre with Laser Transmitter">
+    <p>Transmission on Singlemode Fibre with Laser Transmitter</p>
+    <br>
+</div>
+
+<div style="text-align: center">
+    <br>
+    <img src="images/mm-fibre.png" width="450px" alt="Transmission on Multimode Fibre with Internal Reflection">
+    <p>Transmission on Multimode Fibre with Internal Reflection</p>
+    <br>
+</div>
+
+### IEEE 802.3 10-Gbps Fibre Standards
+
+| Standard | Cable Type | Max Distance |
+| --- | --- | --- |
+| 10GBASE-S | MM | 400m |
+| 10GBASE-LX4 | MM | 300m |
+| 10GBASE-LR | SM | 10km |
+| 10GBASE-E | SM | 30km |
+
+### UTP vs MM vs SM
+
+| Criteria | UTP | Mutlimode | Single-Mode |
+| --- | --- | --- | --- |
+| Relative cost of cabling | Low | Medium | Medium |
+| Relative cost of a switch port | Low | Medium | High |
+| Approximate max distance | 100m | 500m | 40km |
+| Relative susceptibility to interference | Some | None | None |
+| Relative risk of copying from cable emissions | Some | None | None |
+
+### Ethernet Header and Trailer
+| Field | Bytes | Description |
+| --- | --- | --- |
+| Preamble | 7 | Synchronisation - 10101010 10101010..., etc |
+| Start Frame Delimiter (SFD) | 1 | Signifies next byte is the dest MAC - 10101011 |
+| Destination MAC Address | 6 | Receipient of this frame |
+| Source MAC Address | 6 | Sender of this frame |
+| Type | 2 | Type of protocol inside the frame (ID) - IPv4, IPv6, ICMP, ARP, etc |
+| Data and Pad | 46 - 1500<br>(MTU) | L3PDU data, usually an IPv4/IPv6 packet, padding added if needed |
+| Frame Check Sequence (FCS) | 4 | Result of error checking the sender performed on this frame (CRC) |
+
+LAN address, Ethernet address, hardware address, burned-in address, physical address, universal address, MAC address are all the same things.
+
+<div style="text-align: center">
+    <br>
+    <img src="images/unicast-mac.png" width="450px" alt="Structure of multicast MAC address">
+    <p>Structure of multicast MAC address</p>
+    <br>
+</div>
+
+Unicast means one MAC address represents one interface on the Ethernet LAN.
+
+Broadcast address has a value of FF:FF:FF:FF:FF:FF, frames sent to this address should be sent to every device on LAN.
+
+Multicast address specifies a certain subset of devices on the Ethernet LAN.
+
+### Half and Full Duplex
+
+Half duplex means that a device must wait to send while receiving a frame.
+
+Full duplex means that a device can send and receive at the same time.
+
+CSMA/CD is used with hubs to detect and action collisions in half duplex mode.
+
+Hubs do not use half-duplex logic, devices must do this, hubs just repeat any incoming signals to all other ports.
+
+<div style="text-align: center">
+    <br>
+    <img src="images/full-half-duplex.png" width="450px" alt="Full and half duplex on an Ethernet LAN">
+    <p>Full and half duplex on an Ethernet LAN</p>
+    <br>
+</div>
+
+Ethernet shared media refers to network designs that use hubs, they require CSMA/CD and the bandwidth is shared.
+
+Ethernet point-to-point refers to network designs that use switches, each link works independently.
