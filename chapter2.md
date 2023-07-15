@@ -2,28 +2,13 @@
 
 ### Terms
 
-* **Ethernet**
-* **IEEE**
-* **WLAN**
-* **Ethernet frame**
-* **Ethernet link**
-* **RJ-45**
-* **Ethernet port**
-* **NIC**
-* **Straight-through cable**
-* **Crossover cable**
-* **Ethernet address**: aka MAC address
-* **MAC address**
-* **Unicast address**
-* **Broadcast address**
-* **Frame Check Sequence**
-* **Transceiver**
-* **Multimode (MM)**
-* **Single-mode (SM)**
-* **Electromagnetic Interference (EMI)**
-* **Core**
-* **Cladding**
-* **Fibre-optic cable**
+* **Ethernet link**: a cable (UTP or fibre) connected to two devices using ethernet
+* **RJ-45**: the standard of a UTP connector, uses pins 1, 2, 3, 6
+* **Ethernet port**: where a UTP cable plugs in
+* **NIC (Network Interface Card)**: what PCs use to send and receive on a LAN
+* **Fibre-optic cable**: a glass cable where a LED/laser travels through it
+* **Core**: where the LED/laser are contained in a fibre optic cable
+* **Cladding**: the layer where the LED (MM) bounces off in a fibre optic cable
 
 <div style="text-align: center">
     <br>
@@ -40,13 +25,11 @@
 | 1000 Mbps | Gigabit Ethernet | 1000BASE-T | 802.3ab | Copper, 100m |
 | 10 Gbps | 10 Gig Ethernet | 10GBASE-T | 802.3an | Copper, 100m |
 
-Ethernet frames use the same format for the header and trailer no matter the speed or type of cable (UTP/fibre optic).
-
-**Ethernet is a standard not a specific cable**
+**Ethernet frames** use the same format for the header and trailer no matter the speed or type of cable (UTP/fibre optic) (Ethernet is a standard, not a protocol).
 
 UTP cables are twisted to prevent EMI (crosstalk - EMI from a wire to another wire in the same cable).
 
-SFP (Small Form-factor Pluggable): on switch ports where you decide what interface you want - SFP is like USB-C and the SFP modules are the adapters/dongles.
+SFP (Small Form-factor Pluggable): on switch ports where you decide what interface you want (aka transceiver port) - SFP is like USB-C and the SFP modules are the adapters/dongles.
 
 ### Straight-Through and Crossover Cables
 
@@ -110,6 +93,7 @@ Cisco switches have *auto-mdix* which if the wrong cable is used, it changes it'
 | Relative risk of copying from cable emissions | Some | None | None |
 
 ### Ethernet Header and Trailer
+
 | Field | Bytes | Description |
 | --- | --- | --- |
 | Preamble | 7 | Synchronisation - 10101010 10101010..., etc |
@@ -129,19 +113,19 @@ LAN address, Ethernet address, hardware address, burned-in address, physical add
     <br>
 </div>
 
-Unicast means one MAC address represents one interface on the Ethernet LAN.
+**Unicast address**: one MAC address represents one interface on the Ethernet LAN.
 
-Broadcast address has a value of FF:FF:FF:FF:FF:FF, frames sent to this address should be sent to every device on LAN.
+**Broadcast address**: has a value of FF:FF:FF:FF:FF:FF, frames sent to this address should be sent to every device on LAN.
 
-Multicast address specifies a certain subset of devices on the Ethernet LAN.
+**Multicast address**: specifies a certain subset of devices on the Ethernet LAN.
 
 ### Half and Full Duplex
 
-Half duplex means that a device must wait to send while receiving a frame.
+**Half duplex**: means that a device must wait to send while receiving a frame.
 
-Full duplex means that a device can send and receive at the same time.
+**Full duplex**: means that a device can send and receive at the same time.
 
-CSMA/CD is used with hubs to detect and action collisions in half duplex mode.
+**CSMA/CD**: used with hubs to detect and action collisions in half duplex mode.
 
 Hubs do not use half-duplex logic, devices must do this, hubs just repeat any incoming signals to all other ports.
 
@@ -152,6 +136,6 @@ Hubs do not use half-duplex logic, devices must do this, hubs just repeat any in
     <br>
 </div>
 
-Ethernet shared media refers to network designs that use hubs, they require CSMA/CD and the bandwidth is shared.
+**Ethernet shared media**: refers to network designs that use hubs, they require CSMA/CD and the bandwidth is shared.
 
-Ethernet point-to-point refers to network designs that use switches, each link works independently.
+**Ethernet point-to-point**: refers to network designs that use switches, each link works independently.
