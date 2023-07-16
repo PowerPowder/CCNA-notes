@@ -2,6 +2,7 @@
 
 ### Terms
 
+
 * **Ethernet link**: a cable (UTP or fibre) connected to two devices using ethernet
 * **RJ-45**: the standard of a UTP connector, uses pins 1, 2, 3, 6
 * **Ethernet port**: where a UTP cable plugs in
@@ -10,12 +11,21 @@
 * **Core**: where the LED/laser are contained in a fibre optic cable
 * **Cladding**: the layer where the LED (MM) bounces off in a fibre optic cable
 
+### SOHO (Small Office/Small Home) and Enterprise LANs
+<div style="text-align: center">
+    <br>
+    <img src="images/soho-lan.png" width="500px" alt="Small wired and wireless SOHO LAN">
+    <p>Small wired and wireless SOHO LAN</p>
+    <br>
+</div>
 <div style="text-align: center">
     <br>
     <img src="images/enterprise-lan.png" width="500px" alt="Single-building enterprise wired and wireless LAN">
     <p>Single-building enterprise wired and wireless LAN</p>
     <br>
 </div>
+
+### Ethernet Physical Layer Standards
 
 | Speed | Common Name | Informal IEEE<br>Standard Name | Formal IEEE<br>Standard Name | Cable Type,<br>Maximum Length |
 | --- | --- | --- | --- | --- |
@@ -42,8 +52,8 @@ SFP (Small Form-factor Pluggable): on switch ports where you decide what interfa
 
 <div style="text-align: center">
     <br>
-    <img src="images/crossover-cable.png" width="450px" alt="Crossover Ethernet Cable">
-    <p>Crossover Ethernet Cable</p>
+    <img src="images/crossover-cable.png" alt="Crossover Ethernet Cable">
+    <p>Crossover Ethernet Cable - 10BASE-T & 100BASE-T</p>
     <br>
 </div>
 
@@ -73,7 +83,7 @@ Cisco switches have *auto-mdix* which if the wrong cable is used, it changes it'
     <br>
 </div>
 
-### IEEE 802.3 10-Gbps Fibre Standards
+### IEEE 802.3 10-Gbps Fibre Standards - For SFP+ modules
 
 | Standard | Cable Type | Max Distance |
 | --- | --- | --- |
@@ -98,24 +108,26 @@ Cisco switches have *auto-mdix* which if the wrong cable is used, it changes it'
 | --- | --- | --- |
 | Preamble | 7 | Synchronisation - 10101010 10101010..., etc |
 | Start Frame Delimiter (SFD) | 1 | Signifies next byte is the dest MAC - 10101011 |
-| Destination MAC Address | 6 | Receipient of this frame |
-| Source MAC Address | 6 | Sender of this frame |
-| Type | 2 | Type of protocol inside the frame (ID) - IPv4, IPv6, ICMP, ARP, etc |
+| Destination MAC Address | 6 | MAC address of the device receiving this frame |
+| Source MAC Address | 6 | MAC address of the device sending this frame |
+| Type | 2 | Type of protocol inside frame (EtherType) - IPv4, IPv6, ICMP, etc |
 | Data and Pad | 46 - 1500<br>(MTU) | L3PDU data, usually an IPv4/IPv6 packet, padding added if needed |
 | Frame Check Sequence (FCS) | 4 | Result of error checking the sender performed on this frame (CRC) |
+
+### MAC Addresses
 
 LAN address, Ethernet address, hardware address, burned-in address, physical address, universal address, MAC address are all the same things.
 
 <div style="text-align: center">
     <br>
     <img src="images/unicast-mac.png" width="450px" alt="Structure of multicast MAC address">
-    <p>Structure of multicast MAC address</p>
+    <p>Structure of unicast MAC address</p>
     <br>
 </div>
 
 **Unicast address**: one MAC address represents one interface on the Ethernet LAN.
 
-**Broadcast address**: has a value of FF:FF:FF:FF:FF:FF, frames sent to this address should be sent to every device on LAN.
+**Broadcast address**: has a value of FFFF.FFFF.FFFF, frames sent to this address should be sent to every device on LAN.
 
 **Multicast address**: specifies a certain subset of devices on the Ethernet LAN.
 
@@ -124,8 +136,6 @@ LAN address, Ethernet address, hardware address, burned-in address, physical add
 **Half duplex**: means that a device must wait to send while receiving a frame.
 
 **Full duplex**: means that a device can send and receive at the same time.
-
-**CSMA/CD**: used with hubs to detect and action collisions in half duplex mode.
 
 Hubs do not use half-duplex logic, devices must do this, hubs just repeat any incoming signals to all other ports.
 
@@ -139,3 +149,13 @@ Hubs do not use half-duplex logic, devices must do this, hubs just repeat any in
 **Ethernet shared media**: refers to network designs that use hubs, they require CSMA/CD and the bandwidth is shared.
 
 **Ethernet point-to-point**: refers to network designs that use switches, each link works independently.
+
+### Carrier-Sense Multiple Access with Collision Detection
+
+**CSMA/CD**: used with hubs to detect and action collisions in half duplex mode.
+1. Device wanting to send waits until Ethernet is not busy
+2. When Ethernet is not busy, device starts sending the frame
+3. Device listens while sending to see if any collisions occurred, if a collision occurred then:
+    1. Send jamming signal to all devices
+    2. Each device waits a random time
+    3. Reattempt at step 1

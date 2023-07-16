@@ -13,7 +13,7 @@
 * Application (data) - HTTP, POP3, SMTP
 * Transport (segment) - TCP, UDP
 * Network (packet) - IP, ICMP
-* Data Link (frame) - Ethernet, 802.11 (Wi-Fi)
+* Data Link (frame) - Ethernet (802.3), 802.11 (Wi-Fi)
 * Physical (bits) - Electricity? lol
 
 <div style="text-align: center">
@@ -23,6 +23,27 @@
     <br>
 </div>
 
+### Application Layer
+<div style="text-align: center">
+    <br>
+    <img src="images/http.png" alt="HTTP GET request, HTTP reply and data only messages">
+    <p>HTTP GET request, HTTP reply and data only messages</p>
+    <br>
+</div>
+
+### Transport Layer
+Same layer interaction - using TCP headers when Larry and Bob are communicating
+
+Adjacent layer interaction - TCP is providing error checking to HTTP through sequence numbers
+
+<div style="text-align: center">
+    <br>
+    <img src="images/tcp-seq.png" alt="TCP providing error recovery for HTTP - adjacent layer interaction">
+    <p>TCP providing error recovery for HTTP</p>
+    <br>
+</div>
+
+### Network Layer
 <div style="text-align: center">
     <br>
     <img src="images/basic-routing.png" width="500px" alt="Basic Routing Example">
@@ -30,12 +51,17 @@
     <br>
 </div>
 
+### Data-Link Layer
 <div style="text-align: center">
     <br>
     <img src="images/encapsulation-decapsulation.png" width="500px" alt="Using ethernet to forward an IP packet to R1">
     <p>Using Ethernet to forward IP packets</p>
     <br>
 </div>
+
+NOTE: Ethernet is depicted as lines here to show that there are other devices connected but aren't important
+
+### Data Encapsulation
 
 <div style="text-align: center">
     <br>
