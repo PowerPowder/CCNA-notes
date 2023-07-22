@@ -8,13 +8,18 @@
 * **De-capsulation**: remove headers/trailers around data (go up layers)
 * **Encapsulation**: add headers/trailers around data (go down layers)
 * **Protocol Data Unit (PDU)**: name for any layer in the OSI model - L#PDU (L#H = header, L#T = trailer)
+* **Wireless Local-Area Network (WLAN)**: wireless technology, aka Wi-Fi
+* **Enterprise network**: network created by a corporation or enterprise for employees to communicate
+* **SOHO (Small Office/Home Office) network**: smaller home network used for business purposes
+* **IP host**: any device that has an IP address and connects to any TCP/IP network
+* **IP routing (or routing)**: routers forwarding IP packets
 
 ### TCP/IP Model
-* Application (data) - HTTP, POP3, SMTP
-* Transport (segment) - TCP, UDP
-* Network (packet) - IP, ICMP
-* Data Link (frame) - Ethernet (802.3), 802.11 (Wi-Fi)
-* Physical (bits) - Electricity? lol
+* Application (data) - HTTP, POP3, SMTP - provides an interface between the software and the network
+* Transport (segment) - TCP, UDP - ensures Application layer data is received correctly
+* Network (packet) - IP, ICMP - deliver data over entire path (source -> destination)
+* Data Link (frame) - Ethernet (802.3), 802.11 (Wi-Fi) - send data over one physical link (Ethernet vs Wi-Fi)
+* Physical (bits) - cabling and energy - transmit bits over each individual link
 
 <div style="text-align: center">
     <br>
@@ -22,6 +27,10 @@
     <p>OSI compared to TCP/IP and term of each layer</p>
     <br>
 </div>
+
+Any layer can communicate to another device without having to go all the way up to the Application layer 
+
+The following sections go more in depth of a web page being sent from Larry to Bob.
 
 ### Application Layer
 <div style="text-align: center">
@@ -51,6 +60,8 @@ Adjacent layer interaction - TCP is providing error checking to HTTP through seq
     <br>
 </div>
 
+Network layer is for keeping track of the source to the final destination.
+
 ### Data-Link Layer
 <div style="text-align: center">
     <br>
@@ -61,6 +72,8 @@ Adjacent layer interaction - TCP is providing error checking to HTTP through seq
 
 NOTE: Ethernet is depicted as lines here to show that there are other devices connected but aren't important
 
+Data-link layer is for sending the packet to the next host/router (used for each hop).
+
 ### Data Encapsulation
 
 <div style="text-align: center">
@@ -69,3 +82,5 @@ NOTE: Ethernet is depicted as lines here to show that there are other devices co
     <p>TCP/IP Layers showing encapsulation</p>
     <br>
 </div>
+
+Note: The application layer sometimes has a header for the data, e.g. HTTP header
