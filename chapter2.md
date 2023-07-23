@@ -2,16 +2,18 @@
 
 ### Terms
 
-
 * **Ethernet link**: a cable (UTP or fibre) connected to two devices using ethernet
 * **RJ-45**: the standard of a UTP connector, uses pins 1, 2, 3, 6
-* **Ethernet port**: where a UTP cable plugs in
-* **NIC (Network Interface Card)**: what PCs use to send and receive on a LAN
-* **Fibre-optic cable**: a glass cable where a LED/laser travels through it
+* **Ethernet port**: where a UTP/fibre cable plugs in and frames are sent over Ethernet
+* **NIC (Network Interface Card)**: what PCs use to send and receive on a LAN, has a unicast address
+* **Fibre-optic cable**: a fibreglass cable where a LED/laser travels through it
 * **Core**: where the LED/laser are contained in a fibre optic cable
 * **Cladding**: the layer where the LED (MM) bounces off in a fibre optic cable
 
 ### SOHO (Small Office/Small Home) and Enterprise LANs
+
+Many SOHO networks use "wireless router" where a router, switch and AP are combined together in one device.
+
 <div style="text-align: center">
     <br>
     <img src="images/soho-lan.png" width="500px" alt="Small wired and wireless SOHO LAN">
@@ -24,22 +26,23 @@
     <p>Single-building enterprise wired and wireless LAN</p>
     <br>
 </div>
+Note: SWD stands for distribution switch
 
 ### Ethernet Physical Layer Standards
 
 | Speed | Common Name | Informal IEEE<br>Standard Name | Formal IEEE<br>Standard Name | Cable Type,<br>Maximum Length |
 | --- | --- | --- | --- | --- |
 | 10 Mbps | Ethernet | 10BASE-T | 802.3 | Copper, 100m |
-| 100 Mbps | Fast Ethernet | 100BASE-T | 802.3u | Copper, 100m |
+| 100 Mbps | Fast Ethernet | 100BASE-TX | 802.3u | Copper, 100m |
 | 1000 Mbps | Gigabit Ethernet | 1000BASE-LX | 802.3z | Fibre, 5000m |
 | 1000 Mbps | Gigabit Ethernet | 1000BASE-T | 802.3ab | Copper, 100m |
 | 10 Gbps | 10 Gig Ethernet | 10GBASE-T | 802.3an | Copper, 100m |
 
-**Ethernet frames** use the same format for the header and trailer no matter the speed or type of cable (UTP/fibre optic) (Ethernet is a standard, not a protocol).
+Ethernet frames use the same format for the header and trailer no matter the speed or type of cable (UTP/fibre optic) (Ethernet is a standard, not a protocol).
 
 UTP cables are twisted to prevent EMI (crosstalk - EMI from a wire to another wire in the same cable).
 
-SFP (Small Form-factor Pluggable): on switch ports where you decide what interface you want (aka transceiver port) - SFP is like USB-C and the SFP modules are the adapters/dongles.
+SFP (Small Form-factor Pluggable): on switch ports where you decide what interface you want (they are also known as transceivers) - SFP is like USB-C and the SFP modules are the adapters/dongles. SFP has mostly replaced GBIC (Gigabit Ethernet Interface Converter).
 
 ### Straight-Through and Crossover Cables
 
@@ -67,7 +70,14 @@ SFP (Small Form-factor Pluggable): on switch ports where you decide what interfa
 
 Cisco switches have *auto-mdix* which if the wrong cable is used, it changes it's logic to make the link work.
 
-### Single/Multi Mode Fibre
+### Multi/Single Mode Fibre
+
+<div style="text-align: center">
+    <br>
+    <img src="images/mm-fibre.png" width="450px" alt="Transmission on Multimode Fibre with Internal Reflection">
+    <p>Transmission on Multimode Fibre with Internal Reflection</p>
+    <br>
+</div>
 
 <div style="text-align: center">
     <br>
@@ -78,8 +88,8 @@ Cisco switches have *auto-mdix* which if the wrong cable is used, it changes it'
 
 <div style="text-align: center">
     <br>
-    <img src="images/mm-fibre.png" width="450px" alt="Transmission on Multimode Fibre with Internal Reflection">
-    <p>Transmission on Multimode Fibre with Internal Reflection</p>
+    <img src="images/fibre-cables.png" width="450px" alt="Transmision on Singlemode Fibre with Laser Transmitter">
+    <p>Two fibre cables with Tx (transmit) connected to Rx (receive)</p>
     <br>
 </div>
 
@@ -116,7 +126,7 @@ Cisco switches have *auto-mdix* which if the wrong cable is used, it changes it'
 
 ### MAC Addresses
 
-LAN address, Ethernet address, hardware address, burned-in address, physical address, universal address, MAC address are all the same things.
+LAN address, Ethernet address, hardware address, burned-in address, physical address, universal address, global address, MAC address are all the same things.
 
 <div style="text-align: center">
     <br>
@@ -129,7 +139,7 @@ LAN address, Ethernet address, hardware address, burned-in address, physical add
 
 **Broadcast address**: has a value of FFFF.FFFF.FFFF, frames sent to this address should be sent to every device on LAN.
 
-**Multicast address**: specifies a certain subset of devices on the Ethernet LAN.
+**Multicast address**: frames sent to a multicast address are copied and forwarded to a subset of devices in the LAN.
 
 ### Half and Full Duplex
 

@@ -24,13 +24,13 @@
 <div style="text-align: center">
     <br>
     <img src="images/osi-tcpip.png" alt="OSI compared to TCP/IP">
-    <p>OSI compared to TCP/IP and term of each layer</p>
+    <p>OSI compared to 4 & 5 layer TCP/IP</p>
     <br>
 </div>
 
 Any layer can communicate to another device without having to go all the way up to the Application layer 
 
-The following sections go more in depth of a web page being sent from Larry to Bob.
+**The following sections go more in depth of a web page being sent from Larry to Bob.**
 
 ### Application Layer
 <div style="text-align: center">
