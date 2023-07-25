@@ -15,7 +15,7 @@
 * **IP routing (or routing)**: routers forwarding IP packets
 
 ### TCP/IP Model
-* Application (data) - HTTP, POP3, SMTP - provides an interface between the software and the network
+* Application (data) - HTTP, POP3, SMTP, DNS - provides an interface between the software and the network
 * Transport (segment) - TCP, UDP - ensures Application layer data is received correctly
 * Network (packet) - IP, ICMP - deliver data over entire path (source -> destination)
 * Data Link (frame) - Ethernet (802.3), 802.11 (Wi-Fi) - send data over one physical link (Ethernet vs Wi-Fi)
