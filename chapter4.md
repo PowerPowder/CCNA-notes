@@ -30,7 +30,7 @@ Switch CLI can be accessed via:
     <p>Console connection to a switch</p>
 </div>
 
-PC serial port has a D-shell connector with nine pines (DB-9).
+PC serial port has a D-shell connector with nine pins (DB-9).
 
 Rollover cable is like ethernet but with different pinouts, eg pin 1 -> 8, pin 2 -> 7, pin 3 -> 6, ...
 
@@ -45,7 +45,79 @@ Default console port settings (last 3 settings are **8N1**):
 
 **user EXEC mode (user mode)** - allows user to type harmless exec commands, '>' at end of command prompt
 
+The `enable` command changes the mode to enable mode and `disable` goes from enable to user mode.
+
+The `reload` command tells the switch reinitialize or reboot, only can be run in enable mode.
+
+Commands that can be used in user mode and enable mode are EXEC commands.
+
+#### Password Security for CLI Access from the Console
+
+* Passwords can be set for when the user connects to the console and when the user moves to enable mode:
+    * Enable mode password - `enable secret password123` 
+    * user connects to the console password -
+        1. `line console 0` - identifies the console, next commands apply to the console only.
+        2. `login` - perform simple password checking at login.
+        3. `password password123` - the password the user must enter to gain access.
+
+### CLI Help Features
+
+| What You Enter | What Help You Get |
+| --- | --- |
+| `?` | Lists all commands for mode |
+| `command ?` | Lists all first parameters for 'command' |
+| `com?` | Lists commands that start with 'com' |
+| `command param?` | Lists all first parameters starting with 'param' |
+| `command param<TAB>` | Autocomplete the rest of the parameter |
+| `command param1 ?` | Lists all second parameters for 'command' |
+
+### The `debug` and `show` Commands
+
+The `show` command lists facts about the switch's operational status. For example: `show mac address-table dynamic` lists the table the switch uses to make forwarding decisions.
+
+The `debug` command remembers all output from commands entered after the command.
+
+## Configuring Cisco IOS Software
+
+Commands entered in configuration mode update the active configuration file, these changes occur immediately.
+
+<div style="text-align: center">
+    <br>
+    <img src="images/ios-modes.png" width="600px" alt="Escalating/de-escalating different modes in IOS CLI">
+    <p>Escalating/de-escalating different modes in IOS CLI</p>
+    <br>
+</div>
+
+### Configuration Submodes and Contexts
+
+Global configuration mode is the initial configuration mode, you move into subcommand modes (context you care about).
+
+You can move from one configuration submode to another in any configuration submode.
+
+Common switch configuration modes:
+| Prompt | Name of mode | Context-setting commands to reach mode |
+| --- | --- | --- |
+| `hostname(config)#` | Global | None |
+| `hostname(config-line)#` | Line | `line console 0`<br>`line vty 0 15` |
+| `hostname(config-if)#` | Interface | `interface` *type* *number* |
+| `hostname(config-vlan)#` | VLAN | `vlan` *number* |
+
+### Storing Switch Configuration Files
+
+
+
+<div style="margin-bottom:100%"></div>
+
+<!--
 Modes:
-* User Mode
-* Enable Mode
-* Config Mode
+* User Mode 'hostname>'
+* Enable Mode 'hostname#'
+* Config Mode 'hostname(config)#'
+
+<div style="text-align: center">
+    <br>
+    <img src="images/cisco-ios-command-hierarchy.png" width="" alt="Cisco IOS command hierarchy">
+    <p>Cisco IOS command hierarchy</p>
+    <br>
+</div>
+-->
