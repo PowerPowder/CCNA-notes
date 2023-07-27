@@ -14,7 +14,7 @@ Interface type are things like Ethernet, Fast Ethernet, Gigabit Ethernet.
 
 Interfaces that run at multiple speeds are referred to as the highest speed, eg. 10/100/1000Mbps interface is called Gigabit Ethernet.
 
-Interfaces are numbered 0/0, 0/1, ... on older switches or 1/0/1, 1/0/2 on newer switches.
+Interfaces are numbered 0/0, 0/1, ... on older switches or 1/0/1, 1/0/2, ... on newer switches.
 
 ### Accessing the Cisco IOS CLI
 
@@ -103,6 +103,26 @@ Common switch configuration modes:
 | `hostname(config-vlan)#` | VLAN | `vlan` *number* |
 
 ### Storing Switch Configuration Files
+
+Four types of memory in Cisco switches:
+* **RAM**: working memory and where running (active) configuration file is stored.
+* **Flash memory**: stores Cisco IOS images and where switch gets it's Cisco IOS on boot, can store backups on configuration files.
+* **ROM**: stores a bootstrap program that's loaded when switch is powered on, bootstrap program finds Cisco IOS image and loads it into RAM.
+* **NVRAM (Nonvolatile RAM)**: stores initial/startup configuration used when switch is first powered on and when the switch is reloaded.
+
+Configuration files:
+* startup-config: stores initial configuration, used when switch is reloaded, stored in NVRAM.
+* running-config: stores currently used configuration commands, changes dynamic from commands in configuration mode, stored in RAM.
+
+### Copying and Erasing Configuration Files
+
+Use `copy running-config startup-config` to copy the running config to the startup config.
+
+The following commands start a fresh config on a switch:
+1. `write erase`
+2. `erase startup-config`
+3. `erase nvram:`
+4. `reload`
 
 
 
