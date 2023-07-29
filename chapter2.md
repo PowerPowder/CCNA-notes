@@ -38,11 +38,11 @@ Note: SWD stands for distribution switch
 | 1000 Mbps | Gigabit Ethernet | 1000BASE-T | 802.3ab | Copper, 100m |
 | 10 Gbps | 10 Gig Ethernet | 10GBASE-T | 802.3an | Copper, 100m |
 
-Ethernet frames use the same format for the header and trailer no matter the speed or type of cable (UTP/fibre optic) (Ethernet is a standard, not a protocol).
+Ethernet frames use the same format for the header and trailer no matter the speed or type of cable (UTP/fibre optic) (Ethernet is a standard, not a specific cable).
 
 UTP cables are twisted to prevent EMI (crosstalk - EMI from a wire to another wire in the same cable).
 
-SFP (Small Form-factor Pluggable): on switch ports where you decide what interface you want (they are also known as transceivers) - SFP is like USB-C and the SFP modules are the adapters/dongles. SFP has mostly replaced GBIC (Gigabit Ethernet Interface Converter).
+**SFP (Small Form-factor Pluggable)**: on switch ports where you decide what interface you want (they are also known as transceivers) - SFP is like USB-C and the SFP modules are the adapters/dongles. SFP has mostly replaced GBIC (Gigabit Ethernet Interface Converter).
 
 ### Straight-Through and Crossover Cables
 

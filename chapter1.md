@@ -60,8 +60,6 @@ Adjacent layer interaction - TCP is providing error checking to HTTP through seq
     <br>
 </div>
 
-Network layer is for keeping track of the source to the final destination.
-
 ### Data-Link Layer
 <div style="text-align: center">
     <br>
@@ -73,6 +71,8 @@ Network layer is for keeping track of the source to the final destination.
 NOTE: Ethernet is depicted as lines here to show that there are other devices connected but aren't important
 
 Data-link layer is for sending the packet to the next host/router (used for each hop).
+
+Data link protocols control the correct delivery of data over a physical link of a certain type.
 
 ### Data Encapsulation
 

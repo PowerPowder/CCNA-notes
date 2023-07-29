@@ -124,10 +124,6 @@ The following commands start a fresh config on a switch:
 3. `erase nvram:`
 4. `reload`
 
-
-
-<div style="margin-bottom:100%"></div>
-
 <!--
 Modes:
 * User Mode 'hostname>'

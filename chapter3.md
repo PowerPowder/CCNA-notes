@@ -7,13 +7,10 @@
 * **Serial interface**: used by routers to connect to serial lines
 * **Ethernet over MPLS (Multiprotocol Label Switching)**: technology used to create Ethernet service for customer
 * **Ethernet Line Service (E-Line)**: defined by MEF, provides point-to-point Ethernet WAN between two customer devices; like those two devices were connected using an Ethernet crossover cable.
-* **Default router (Default Gateway)**: The nearest router on a LAN to a host
-* **Default router (Default Gateway)**: IP address of a router that a host sends packets to when it needs them outside of its subnet.
+* **Default router (Default Gateway)**: IP address of a router, a host sends packets to this IP when sending outside of subnet.
 * **Routing protocol**: messages and processes routers use to exchange information to reach different subnets (EIGRP, OSPF, RIP).
 * **IPv4 address**: address assigned to hosts, address has a network number, optional subnet number, host number.
-* **Hostname**
-
-Data link protocols control the correct delivery of data over a physical link of a certain type.
+* **Hostname**: a label for a host on a network (what the network calls it).
 
 ## Leased-Line WANs
 * Routers connect LAN to the WAN and have a WAN link to other routers.
