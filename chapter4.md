@@ -2,6 +2,16 @@
 
 ## Accessing the Cisco Switch CLI
 
+### Terms
+* **command-line interface (CLI)**: interface to interact with the operating system 
+* **Telnet**: protocol used to remote into systems with a CLI without encryption
+* **Secure Shell**: remote into systems with a CLI with encryption and keys
+* **enable mode**: enable settings to switches/routers (user EXEC, password, reload)
+* **user mode**: used for nondisruptive EXEC commands, like looking at current status
+* **configuration mode**: used for config commands that are added to running config file
+* **startup-config file**: sits in NVRAM, holds config file that's loaded into RAM on reload or power on
+* **running-config file**: sits in RAM, holds currently ued config
+
 ### Cisco Catalyst Switches
 
 This all refers to Cisco Catalyst enterprise-class switches.
