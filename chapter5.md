@@ -13,6 +13,15 @@ does the default gateway need to be manually configured on a switch?
 
 does a switch send out the same unicast frame to all ports that have the same destination mac address?
 
+## Terms
+* **Broadcast frame**: frame sent to FFFF.FFFF.FFFF, deliver to all hosts on LAN
+* **Known unicast frame**: frame's dest MAC address is listed in a switch and sent out of it's corresponding port
+* **Spanning Tree Protocol**: protocol that dynamically blocks ports for traffic on switches/bridges to prevent loops
+* **Unknown unicast frame**: frame not in a switch's MAC Address table, switch must flood for frame
+* **MAC address table**: dynamic list of MACs on switch that listens and decides incoming frames' destination
+* **Forward**: send a frame from one interface and out another
+* **Flood**: forwards frames out all interfaces except receiving interface for broadcast, unknown unicast and multicast frames
+
 ## LAN Switching Concepts
 
 campus-lan: end-user devices connect to lan switches
