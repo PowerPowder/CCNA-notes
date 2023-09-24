@@ -1,17 +1,19 @@
 # Chapter 5
 
-three primary features of LAN switches:
-make decisins to forward/filter frames
-learn mac addresses
-STP
+Primary features of LAN switches:
+* make decisions to forward or filter frames
+* learn mac addresses
+* implement and maintain STP
 
 **switches act like a host in regards to IP - needs a default gateway**
 
-do switches fload unknown multicast frames?
+do switches flood unknown multicast frames? yes
 
-does the default gateway need to be manually configured on a switch?
+does the default gateway need to be manually configured on a switch? yes?
 
-does a switch send out the same unicast frame to all ports that have the same destination mac address?
+does a switch send out the same unicast frame to all ports that have the same destination mac address? no
+
+switches autonegotiate 10/100, 10/100/1000 interfaces by default.
 
 ## Terms
 * **Broadcast frame**: frame sent to FFFF.FFFF.FFFF, deliver to all hosts on LAN
@@ -24,24 +26,25 @@ does a switch send out the same unicast frame to all ports that have the same de
 
 ## LAN Switching Concepts
 
-campus-lan: end-user devices connect to lan switches
-data center: servers and switches in a closed room that connect to the campus-lan
+**Campus-lan**: end-user devices connect to lan switches
+
+**Data center**: servers and switches in a closed room that connect to the campus-lan
 
 ### Overview of switching logic
 
-purpose of a lan switch - forward frames to the  correct destination (mac) address.
+Purpose of a lan switch - forward frames to the correct destination (mac) address.
 
-actions performed by switches:
-1. decide when to forward or filter a frame based of destination MAC address.
-2. prepare to forward by examining the source mac address of each frame received (learning).
-3. only forward one copy of the frame to the destination by using Spanning Tree Protocol (STP) to prevent loops.
+Actions performed by switches:
+1. Decide when to forward or filter a frame based of destination MAC address.
+2. Prepare to forward by examining the source mac address of each frame received (learning).
+3. Only forward one copy of the frame to the destination by using Spanning Tree Protocol (STP) to prevent loops.
 
 ### Forwarding known unicast frames
 
-<div style="text-align: center">
+<!-- <div style="text-align: center">
     <img src="images/switch-forwarding.png" width="500px" alt="Sample switch forwarding and filtering decision">
     <p>Sample switch forwarding and filtering decision</p>
-</div>
+</div> -->
 
 <div style="text-align: center">
     <br>
@@ -49,18 +52,16 @@ actions performed by switches:
     <p>Forwarding decision with two switches</p>
 </div>
 
-**Unicast frames (unicasts)**: frames that have a known destination (unicast) MAC address in a switch's MAC address table.
-
 ### Learning MAC Addresses
 
 <div style="text-align: center">
     <img src="images/empty-address-table.png" width="500px" alt="Switch learning: empty table and adding two entries">
-    <p>Switch learning: empty table and adding two entries (ignoring forwaring process)</p>
+    <p>Switch learning: empty table and adding two entries (ignoring forwarding process)</p>
 </div>
 
-### Flooding unknown unicast and broadcast frames
+The above diagram shows Fred sending a frame to Barney and Barney then sending a frame back to Fred.
 
-**Unknown unicast frame (unknown unicast)**: an unknown unicast MAC address sent to a switch.
+### Flooding unknown unicast and broadcast frames
 
 Switch forwards copies of the frame out all ports except for the incoming port.
 
@@ -73,9 +74,9 @@ The device with the requested MAC address will send a reply, the switch learns t
 
 ### Avoiding Loops Using Spanning Tree Protocol
 
-without stp, flooded frames would loop infinitely in Ethernet networks with redundant links.
+Without STP, flooded frames would loop infinitely in Ethernet networks with redundant links.
 
-stp blocks some ports from sending frames, so only one active logical path exists between any device.
+STP blocks some ports from sending frames, so **only one active logical path exists between any device**.
 
 <div style="text-align: center">
     <img src="images/stp-example.png" width="500px" alt="Network with redundant links but without STP (frame loops forever)">
@@ -85,3 +86,52 @@ stp blocks some ports from sending frames, so only one active logical path exist
 STP causes each port on a switch to be in blocking (can't forward) or forwarding (can forward) states.
 
 ### LAN Switching Summary
+
+If a switch receives a known unicast frame and is meant to be sent from the same interface it was received from, then the switch ignores the frame.
+
+## Verifying and Analysing Ethernet Switching
+
+### Demonstrating MAC Learning
+
+```
+erase startup-config
+delete vlan.dat
+reload
+hostname SW1
+```
+
+`show mac address-table dynamic`
+
+LAN switches forward frames within VLANs, frame incoming from a port in VLAN 1 will only be forwarded to other ports on VLAN 1.
+
+### Switch Interfaces
+
+`show interfaces status`
+
+Switches name their ports based on the fasted speed supported, i.e. 10/100/1000Mbps is Gigabit Ethernet.
+
+`show interfaces f0/1 counters`
+
+### Finding Entries in the MAC Address Table
+
+`show mac address-table dynamic address 0200.1111.1111`
+
+`show mac address-table dynamic interface fastEthernet 0/1`
+
+`show mac-address table dynamic vlan 1`
+
+### Managing the MAC Address Table (Aging, Clearing)
+
+Switches remove MAC table entries that have not been used for x number of seconds, default is 300 seconds.
+
+The oldest entries in aging time are removed when the switch runs out of memory for new entries.
+
+Aging time can be overridden by setting a specific VLAN to do so.
+
+`show mac address-table aging-time`
+
+`show mac address-table count`
+
+**CAM (Content-addressable memory)**: physical memory with great table lookup capabilities, where MAC table entries are stored.
+
+`clear mac address-table dynamic` - enable mode command, can add `vlan x`, `interface x` or `address x`
