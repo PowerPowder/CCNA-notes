@@ -1,20 +1,5 @@
 # Chapter 5
 
-Primary features of LAN switches:
-* make decisions to forward or filter frames
-* learn mac addresses
-* implement and maintain STP
-
-**switches act like a host in regards to IP - needs a default gateway**
-
-do switches flood unknown multicast frames? yes
-
-does the default gateway need to be manually configured on a switch? yes?
-
-does a switch send out the same unicast frame to all ports that have the same destination mac address? no
-
-switches autonegotiate 10/100, 10/100/1000 interfaces by default.
-
 ## Terms
 * **Broadcast frame**: frame sent to FFFF.FFFF.FFFF, deliver to all hosts on LAN
 * **Known unicast frame**: frame's dest MAC address is listed in a switch and sent out of it's corresponding port
@@ -24,7 +9,28 @@ switches autonegotiate 10/100, 10/100/1000 interfaces by default.
 * **Forward**: send a frame from one interface and out another
 * **Flood**: forwards frames out all interfaces except receiving interface for broadcast, unknown unicast and multicast frames
 
-## LAN Switching Concepts
+## Features of Switches
+
+Primary features of LAN switches:
+* make decisions to forward or filter frames
+* learn mac addresses
+* implement and maintain STP
+
+Ports are named based on their fasted speed and are autonegotiated, i.e. 10/100/1000Mbps is Gigabit Ethernet.
+
+Switches forward frames within VLANs, frame received from a port in VLAN 1 only is forwarded to ports on VLAN 1.
+
+Switches act like a host for IP, they need a defalt gateway.
+
+Reset config of switch:
+```
+erase startup-config
+delete vlan.dat
+reload
+hostname SW1
+```
+
+## Switch Concepts - Forwarding, Learning, Flooding
 
 **Campus-lan**: end-user devices connect to lan switches
 
@@ -62,7 +68,7 @@ If a switch receives a known unicast frame and is meant to be sent from the same
 
 Switch floods all ports except for receiving port, the device with the requested MAC replies, the switch learns the device's MAC address. This applies to unknown unicast and broadcast frames.
 
-### Spanning Tree Protocol (STP)
+## Spanning Tree Protocol (STP)
 
 Without STP, flooded frames would loop infinitely in Ethernet networks with redundant links.
 
@@ -73,51 +79,29 @@ STP causes each port on a switch to be in blocking (can't forward) or forwarding
     <p>Network with redundant links, no STP (frame loops forever both directions)</p>
 </div>
 
-
-## Verifying and Analysing Ethernet Switching
-
-### Demonstrating MAC Learning
-
-Reset config of switch:
-```
-erase startup-config
-delete vlan.dat
-reload
-hostname SW1
-```
+## MAC Address Tables
 
 `show mac address-table dynamic` lists the MAC address table of a switch.
 
-Switches forward frames within VLANs, frame received from a port in VLAN 1 only is forwarded to ports on VLAN 1.
-
-### Switch Interfaces
-
 `show interfaces status` lists all ports and their connection status.
 
-Switches name their ports based on the fasted speed supported, i.e. 10/100/1000Mbps is Gigabit Ethernet.
+`show interfaces f0/1 counters` lists amount of incoming and outgoing frames.
 
-`show interfaces f0/1 counters`
+Filter entres in the MAC address table by:
+* MAC address - `show mac address-table dynamic address 0200.1111.1111`
+* Switch port - `show mac address-table dynamic interface fastEthernet 0/1`
+* VLAN - `show mac-address table dynamic vlan 1`
 
-### Finding Entries in the MAC Address Table
+## Aging Time and Clearing MAC Address Table
 
-`show mac address-table dynamic address 0200.1111.1111`
+Entries are removed if not used for 'x' number of seconds (default is 300 seconds), oldest entries are removed when switch runs out of memory.
 
-`show mac address-table dynamic interface fastEthernet 0/1`
+Aging time can be overridden by assigning a port do a specific VLAN.
 
-`show mac-address table dynamic vlan 1`
+`show mac address-table aging-time` lists the global and each per-VLAN override aging time.
 
-### Managing the MAC Address Table (Aging, Clearing)
+`show mac address-table count` lists the amount of dynamic and static MAC address entries.
 
-Switches remove MAC table entries that have not been used for x number of seconds, default is 300 seconds.
-
-The oldest entries in aging time are removed when the switch runs out of memory for new entries.
-
-Aging time can be overridden by setting a specific VLAN to do so.
-
-`show mac address-table aging-time`
-
-`show mac address-table count`
-
-**CAM (Content-addressable memory)**: physical memory with great table lookup capabilities, where MAC table entries are stored.
+**CAM (Content-addressable memory)**: fast table lookup capabilities, where MAC table entries are stored.
 
 `clear mac address-table dynamic` - enable mode command, can add `vlan x`, `interface x` or `address x`
