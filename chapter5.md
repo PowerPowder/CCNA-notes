@@ -30,16 +30,12 @@ switches autonegotiate 10/100, 10/100/1000 interfaces by default.
 
 **Data center**: servers and switches in a closed room that connect to the campus-lan
 
-### Overview of switching logic
-
-Purpose of a lan switch - forward frames to the correct destination (mac) address.
-
 Actions performed by switches:
 1. Decide when to forward or filter a frame based of destination MAC address.
 2. Prepare to forward by examining the source mac address of each frame received (learning).
 3. Only forward one copy of the frame to the destination by using Spanning Tree Protocol (STP) to prevent loops.
 
-### Forwarding known unicast frames
+If a switch receives a known unicast frame and is meant to be sent from the same interface it was received from, then the switch ignores the frame.
 
 <!-- <div style="text-align: center">
     <img src="images/switch-forwarding.png" width="500px" alt="Sample switch forwarding and filtering decision">
@@ -49,50 +45,40 @@ Actions performed by switches:
 <div style="text-align: center">
     <br>
     <img src="images/switch-forwarding-2.png" width="500px" alt="Forwarding decision with two switches">
-    <p>Forwarding decision with two switches</p>
+    <p>Forwarding known unicast frames between two switches</p>
 </div>
 
-### Learning MAC Addresses
-
 <div style="text-align: center">
+    <br>
     <img src="images/empty-address-table.png" width="500px" alt="Switch learning: empty table and adding two entries">
-    <p>Switch learning: empty table and adding two entries (ignoring forwarding process)</p>
+    <p>Switching learning MAC addresses from two frames sent between Fred and Barney</p>
 </div>
 
-The above diagram shows Fred sending a frame to Barney and Barney then sending a frame back to Fred.
-
-### Flooding unknown unicast and broadcast frames
-
-Switch forwards copies of the frame out all ports except for the incoming port.
-
-The device with the requested MAC address will send a reply, the switch learns that device's MAC address.
-
 <div style="text-align: center">
+    <br>
     <img src="images/switch-flooding.png" width="500px" alt="Switch flooding: unknown unicast arrives, floods out other ports">
     <p>Switch flooding: unknown unicast arrives, floods out other ports</p>
 </div>
 
-### Avoiding Loops Using Spanning Tree Protocol
+Switch floods all ports except for receiving port, the device with the requested MAC replies, the switch learns the device's MAC address. This applies to unknown unicast and broadcast frames.
+
+### Spanning Tree Protocol (STP)
 
 Without STP, flooded frames would loop infinitely in Ethernet networks with redundant links.
 
-STP blocks some ports from sending frames, so **only one active logical path exists between any device**.
+STP causes each port on a switch to be in blocking (can't forward) or forwarding (can forward) states, so **only one active logical path exists between any device**.
 
 <div style="text-align: center">
     <img src="images/stp-example.png" width="500px" alt="Network with redundant links but without STP (frame loops forever)">
     <p>Network with redundant links, no STP (frame loops forever both directions)</p>
 </div>
 
-STP causes each port on a switch to be in blocking (can't forward) or forwarding (can forward) states.
-
-### LAN Switching Summary
-
-If a switch receives a known unicast frame and is meant to be sent from the same interface it was received from, then the switch ignores the frame.
 
 ## Verifying and Analysing Ethernet Switching
 
 ### Demonstrating MAC Learning
 
+Reset config of switch:
 ```
 erase startup-config
 delete vlan.dat
@@ -100,13 +86,13 @@ reload
 hostname SW1
 ```
 
-`show mac address-table dynamic`
+`show mac address-table dynamic` lists the MAC address table of a switch.
 
-LAN switches forward frames within VLANs, frame incoming from a port in VLAN 1 will only be forwarded to other ports on VLAN 1.
+Switches forward frames within VLANs, frame received from a port in VLAN 1 only is forwarded to ports on VLAN 1.
 
 ### Switch Interfaces
 
-`show interfaces status`
+`show interfaces status` lists all ports and their connection status.
 
 Switches name their ports based on the fasted speed supported, i.e. 10/100/1000Mbps is Gigabit Ethernet.
 
