@@ -4,9 +4,9 @@
 * **Broadcast frame**: frame sent to FFFF.FFFF.FFFF, deliver to all hosts on LAN
 * **Known unicast frame**: frame's dest MAC address is listed in a switch and sent out of it's corresponding port
 * **Spanning Tree Protocol**: protocol that dynamically blocks ports for traffic on switches/bridges to prevent loops
-* **Unknown unicast frame**: frame not in a switch's MAC Address table, switch must flood for frame
-* **MAC address table**: dynamic list of MACs on switch that listens and decides incoming frames' destination
-* **Forward**: send a frame from one interface and out another
+* **Unknown unicast frame**: frame not in a switch's MAC address table, switch must flood to learn that device's MAC
+* **MAC address table**: dynamic list of MACs on switch that listens and decides destination of incoming frames
+* **Forward**: receive a frame from one port and send it to another port.
 * **Flood**: forwards frames out all interfaces except receiving interface for broadcast, unknown unicast and multicast frames
 
 ## Features of Switches
@@ -57,13 +57,13 @@ If a switch receives a known unicast frame and is meant to be sent from the same
 <div style="text-align: center">
     <br>
     <img src="images/empty-address-table.png" width="500px" alt="Switch learning: empty table and adding two entries">
-    <p>Switching learning MAC addresses from two frames sent between Fred and Barney</p>
+    <p>Switch learning MAC addresses from frames sent between Fred and Barney (learns from source MAC)</p>
 </div>
 
 <div style="text-align: center">
     <br>
     <img src="images/switch-flooding.png" width="500px" alt="Switch flooding: unknown unicast arrives, floods out other ports">
-    <p>Switch flooding: unknown unicast arrives, floods out other ports</p>
+    <p>Switch flooding LAN - unknown unicast arrives, floods out other ports</p>
 </div>
 
 Switch floods all ports except for receiving port, the device with the requested MAC replies, the switch learns the device's MAC address. This applies to unknown unicast and broadcast frames.
@@ -85,7 +85,7 @@ STP causes each port on a switch to be in blocking (can't forward) or forwarding
 
 `show interfaces status` lists all ports and their connection status.
 
-`show interfaces f0/1 counters` lists amount of incoming and outgoing frames.
+`show interfaces f0/1 counters` lists total amount of incoming and outgoing frames.
 
 Filter entres in the MAC address table by:
 * MAC address - `show mac address-table dynamic address 0200.1111.1111`
@@ -96,7 +96,7 @@ Filter entres in the MAC address table by:
 
 Entries are removed if not used for 'x' number of seconds (default is 300 seconds), oldest entries are removed when switch runs out of memory.
 
-Aging time can be overridden by assigning a port do a specific VLAN.
+Aging time can be overridden by assigning a port to a specific VLAN.
 
 `show mac address-table aging-time` lists the global and each per-VLAN override aging time.
 
