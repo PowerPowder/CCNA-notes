@@ -119,3 +119,24 @@ Switches use a VLAN interface which acts as its NIC.
 3. `no shutdown`
 
 ### Verifying IPv4 on a Switch
+
+To check IPv4 config on a switch - IP address and subnet mask:
+
+* `show running-config`
+* `show interfaces vlan <x>`
+* `show dhcp lease`
+
+## Miscellaneous Settings Useful in the Lab
+
+## History Buffer Commands
+
+* `show history` - EXEC command to list commands entered held in the history buffer
+* `terminal history size <x>` - Change history buffer size in EXEC mode for logged in user only for this session
+* `history size <x>` - config command that sets the history buffer size by default for all users
+
+## The logging syncrhonous, exec-timeout, and no ip domain-lookup Commands
+
+* `no logging console` - global config command to disable log messages on a switch
+* `logging synchronous` - global config command to dislay syslog messages after entered commands, i.e when using `show`
+* `exec-timeout <minutes> <seconds>` - set inactivity timer, default is 5 minutes
+* `no ip domain-lookup` - stops the switch from resolving hostnames, prevents waiting a minute for a mistyped command
