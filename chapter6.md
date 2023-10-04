@@ -1,11 +1,5 @@
 # Chapter 6
 
-Are settings tied to each vlan?
-
-can you *remote* into different vlans?
-
-does only one vlan control the whole switch when remoting in?
-
 ## Terms
 * **Telnet**: protocol used to remote into systems with a CLI without encryption
 * **SSH**: remote into systems with a CLI using encryption and keys
@@ -28,15 +22,9 @@ Work performed by networking devices:
 2. Configuration and processes - control and change choices made by data plane
 3. Management plane - security, remoting into device
 
-## Securing the Switch CLI
+## Setting Passwords for User/Enable Mode
 
-Switch needs to be configured an IP address to support Telnet and SSH.
-
-### Securing User Mode and Privileged Mode with Simple Passwords
-
-Accessing user mode - console users supply console password, Telnet users supply vty password.
-
-Accessing enable mode - both users supply the enable password
+### Shared Password - Console, Telnet, Enable Mode
 
 <div style="text-align: center">
     <br>
@@ -44,15 +32,11 @@ Accessing enable mode - both users supply the enable password
     <p>Simple Password Security Configuration - set enable mode password first</p>
 </div>
 
-`login` tells IOS t enable a password (no username) on this line.
-
-`password` is the password used.
-
-`enable secret` is the enable mode password.
-
 Virtual terminal (VTY) lines are the amount of possible connections allowed to a router/switch, numbered 0-15.
 
-### Securing User Mode Access with Local Usernames and Passwords
+### Local Usernames/Passwords - Console, Telnet/SSH
+
+`no password` can be used to remove existing shared passwords.
 
 <div style="text-align: center">
     <br>
@@ -60,9 +44,21 @@ Virtual terminal (VTY) lines are the amount of possible connections allowed to a
     <p>Configuring switches to use local username login authentication</p>
 </div>
 
-`no password` can be used to remove existing shared passwords.
+<div style="text-align: center">
+    <br>
+    <img src="images/ssh-config.png" width="500px" alt="Adding SSH configuration to local username configuration">
+    <p>Adding SSH configuration to local username configuration</p>
+</div>
 
-### Securing User Mode Access with External Authentication Servers
+Note: Key modulus is prompted if not specified as a parameter in `crypto`.
+
+`transport input [all | none | telnet | ssh]` in vty mode allows to set Telnet/SSH.
+
+`show ip ssh` lists status information (SSH version) about the SSH server.
+
+`show ssh` lists each client currently connected to the switch through SSH.
+
+### External Authentication Servers
 
 Switches log all commands users enter and when the log into the switch.
 
@@ -74,27 +70,11 @@ Switches log all commands users enter and when the log into the switch.
 
 RADIUS and TACACS+ are protocols that encrypt passwords.
 
-### Securing Remote Access with Secure Shell
-
-<div style="text-align: center">
-    <br>
-    <img src="images/ssh-config.png" width="500px" alt="Adding SSH configuration to local username configuration">
-    <p>Adding SSH configuration to local username configuration</p>
-</div>
-
-The switch creates the fully qualified domain name (FQDN) from hostname and domain name.
-
-Key modulus is prompted if not specified as a parameter in `crypto`.
-
-`transport input` in vty mode allows to set Telnet/SSH (`all`, `none`, `telnet`, `ssh`).
-
-`show ip ssh` lists status information about the SSH server.
-
-`show ssh` lists each client currently connected to the switch.
-
-## Enabling IPv4 for Remote Access
+## IPv4 Remote Access on Switches
 
 ### Host and Switch IP Settings
+
+Any VLAN can be used as a management VLAN, needs an IP address and default gateway configured.
 
 Switches use a VLAN interface which acts as its NIC.
 
@@ -104,39 +84,41 @@ Switches use a VLAN interface which acts as its NIC.
     <p>Switches require a default gateway to be set to send frames outside a subnet</p>
 </div>
 
-### Configuring IPv4 on a Switch
+### Configuring IPv4
 
-1. `interface vlan 1` - configure vlan 1
-2. `ip address <ip-address> <mask>` - assign IP address and subnet mask
-3. `no shutdown` - administratively enable vlan 1 interface
-4. `ip default-gateway <ip-address>` - set default gateway
-5. (Optional) `ip name-server <ip-address-1> <ip-address-2> ...` - set DNS severs for name resolution
+```
+interface vlan <x>
+ip address <ip-address> <mask>
+no shutdown
+ip default-gateway <ip-address>
+ip name-server <dns-ip-1> <dns-ip-2> ...
+```
 
-### Configuring a Switch to Learn Its IP Address with DHCP
+### Enable DHCP
 
-1. `interface vlan 1`
-2. `ip address dhcp`
-3. `no shutdown`
+```
+interface vlan <x>
+ip address dhcp
+no shutdown
+```
 
-### Verifying IPv4 on a Switch
-
-To check IPv4 config on a switch - IP address and subnet mask:
+### Check IP Address and Subnet Mask
 
 * `show running-config`
 * `show interfaces vlan <x>`
 * `show dhcp lease`
 
-## Miscellaneous Settings Useful in the Lab
+## Other Commands
 
-## History Buffer Commands
+### History Buffer Commands
 
 * `show history` - EXEC command to list commands entered held in the history buffer
 * `terminal history size <x>` - Change history buffer size in EXEC mode for logged in user only for this session
 * `history size <x>` - config command that sets the history buffer size by default for all users
 
-## The logging syncrhonous, exec-timeout, and no ip domain-lookup Commands
+### The logging syncrhonous, exec-timeout, and no ip domain-lookup Commands
 
 * `no logging console` - global config command to disable log messages on a switch
-* `logging synchronous` - global config command to dislay syslog messages after entered commands, i.e when using `show`
+* `logging synchronous` - global config command to dislay syslog messages after output of commands
 * `exec-timeout <minutes> <seconds>` - set inactivity timer, default is 5 minutes
-* `no ip domain-lookup` - stops the switch from resolving hostnames, prevents waiting a minute for a mistyped command
+* `no ip domain-lookup` - stops the switch from resolving hostnames, prevents waiting after mistyped commands
