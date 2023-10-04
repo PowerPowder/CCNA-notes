@@ -4,10 +4,7 @@
 * **Telnet**: protocol used to remote into systems with a CLI without encryption
 * **SSH**: remote into systems with a CLI using encryption and keys
 * **Local username**: username (with password) configured locally on a router or switch
-* **AAA**:
-    * **A**uthentication - confirms **identity** of user/device
-    * **A**uthorisation - what user/device is allowed to do (**permissions**)
-    * **A**ccounting - records user/device access attempts (**logs**)
+* **AAA**: **A**uthentication (identity of user/device), **A**uthorisation (permissions), **A**ccounting (logging commands)
 * **AAA server**: contains security info and provides user login services
 * **Enable mode**: enable settings to switches/routers (user EXEC, password, reload)
 * **Default gateway**: IP address of a router, a host sends packets to this IP when sending outside of subnet.
@@ -16,11 +13,6 @@
 * **DNS**: protocol that translates hostnames into IP addresses and vice versa
 * **Name resolution**: IP host discovers IP address associated with a hostname
 * **Log message**:
-
-Work performed by networking devices:
-1. Data plane - switches forwarding frames
-2. Configuration and processes - control and change choices made by data plane
-3. Management plane - security, remoting into device
 
 ## Setting Passwords for User/Enable Mode
 
