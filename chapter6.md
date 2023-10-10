@@ -7,12 +7,11 @@
 * **AAA**: **A**uthentication (identity of user/device), **A**uthorisation (permissions), **A**ccounting (logging commands)
 * **AAA server**: contains security info and provides user login services
 * **Enable mode**: enable settings to switches/routers (user EXEC, password, reload)
-* **Default gateway**: IP address of a router, a host sends packets to this IP when sending outside of subnet.
+* **Default gateway**: IP address of a router, host sends packets to this IP when sending outside subnet.
 * **VLAN interface**: interface between IOS and VLAN supported inside switch
 * **History buffer**: list of commands in IOS that a user has entered in their session
 * **DNS**: protocol that translates hostnames into IP addresses and vice versa
 * **Name resolution**: IP host discovers IP address associated with a hostname
-* **Log message**:
 
 ## Setting Passwords for User/Enable Mode
 
@@ -102,15 +101,10 @@ no shutdown
 
 ## Other Commands
 
-### History Buffer Commands
-
 * `show history` - EXEC command to list commands entered held in the history buffer
 * `terminal history size <x>` - Change history buffer size in EXEC mode for logged in user only for this session
 * `history size <x>` - config command that sets the history buffer size by default for all users
-
-### The logging syncrhonous, exec-timeout, and no ip domain-lookup Commands
-
 * `no logging console` - global config command to disable log messages on a switch
-* `logging synchronous` - global config command to dislay syslog messages after output of commands
+* `logging synchronous` - global config command to display syslog messages after output of commands
 * `exec-timeout <minutes> <seconds>` - set inactivity timer, default is 5 minutes
 * `no ip domain-lookup` - stops the switch from resolving hostnames, prevents waiting after mistyped commands
