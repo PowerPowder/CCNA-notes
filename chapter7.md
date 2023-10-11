@@ -57,7 +57,7 @@ If no response is sent after trying to autonegotiate, switches do (IEEE):
     <p>IEEE autonegotiation results with autonegotiation disabled on one side</p>
 </div>
 
-duplex mismatch: two nodes have different duplex modes configured.
+duplex mismatch: two nodes have different duplex modes configured, will be still listed as up/up.
 
 #### Autonegotiation and LAN Hubs
 
@@ -69,10 +69,27 @@ devices connected to hubs must use IEEE rules, leads to devices use 10Mbps half 
 
 ### Interface Status Codes and Reasons for Nonworking States
 
-| Line Status | Protocol<br>Status | Interface<br>Status | Typical Root Cause |
+| Line Status (L1) | Protocol<br>Status (L2) | Interface<br>Status | Typical Root Cause |
 | :-: | :-: | :-: | :-: |
 | administratively down | down | disabled | The `shutdown` command is configured on the interface. |
 | down | down | notconnect | No cable; bad cable; wrong cable pinouts, speed<br> mismatch, neighbouring device is (a) powered off, <br>(b), shutdown, or (c) error disabled. |
 | up | down | notconnect | Not expected on LAN swich physical interfaces. |
 | down | down (err-disabled) | err-disabled | Port security has disabled the interface. |
 | up | up | connected | The interface is working. |
+
+### Interface Speed and Duplex Issues
+
+n/a
+
+### Common Layer 1 Problems on Working Interfaces
+
+Interface counters from `show interfaces <x>`:
+* **Runts** - frame smaller than minimum size ( < 64 bytes)
+* **Giants** - frames bigger than maximum size ( > 1518 bytes)
+* **Input Errors** - total including runts, giants, no buffer, CRC, frame, overrun, ignored counts
+* **CRC** - frames not passing FCS math
+* **Frame** - frame has illegal format
+* **Packet Output** - total packets sent out of interface
+* **Output Errors** - total packets failed after trying to transmit
+* **Collisions** - count of collisions caused when transmitting from this interface
+* **Late Collisions** - collisions that occurred after a frame's 64th byte (possible duplex mismatch)
