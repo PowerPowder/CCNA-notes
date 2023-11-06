@@ -1,7 +1,44 @@
 {
     "cSpell.words": [
         "autonegotiate",
+        "autonegotiated",
         "Autonegotiation",
-        "Mbps"
+        "CSMA",
+        "decapsulating",
+        "decapsulation",
+        "EIGRP",
+        "fibreglass",
+        "GBIC",
+        "Gbps",
+        "HDLC",
+        "hostnames",
+        "Mbps",
+        "mdix",
+        "MPLS",
+        "Multimode",
+        "Multiprotocol",
+        "neighbour",
+        "neighbours",
+        "nondisruptive",
+        "notconnect",
+        "NVRAM",
+        "OSPF",
+        "Pinout",
+        "Pluggable",
+        "Singlemode",
+        "specialised",
+        "Synchronisation",
+        "TACACS",
+        "tcpip",
+        "telcos",
+        "WLAN"
+    ],
+    "cSpell.ignoreWords": [
+        "GBASE",
+        "ccounting",
+        "decap",
+        "encap",
+        "uthentication",
+        "uthorisation"
     ]
 }

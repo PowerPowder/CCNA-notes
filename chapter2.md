@@ -32,11 +32,11 @@ Note: SWD stands for distribution switch
 
 | Speed | Common Name | Informal IEEE<br>Standard Name | Formal IEEE<br>Standard Name | Cable Type,<br>Maximum Length |
 | --- | --- | --- | --- | --- |
-| 10 Mbps | Ethernet | 10BASE-T | 802.3 | Copper, 100m |
-| 100 Mbps | Fast Ethernet | 100BASE-TX | 802.3u | Copper, 100m |
-| 1000 Mbps | Gigabit Ethernet | 1000BASE-LX | 802.3z | Fibre, 5000m |
-| 1000 Mbps | Gigabit Ethernet | 1000BASE-T | 802.3ab | Copper, 100m |
-| 10 Gbps | 10 Gig Ethernet | 10GBASE-T | 802.3an | Copper, 100m |
+| 10Mbps | Ethernet | 10BASE-T | 802.3 | Copper, 100m |
+| 100Mbps | Fast Ethernet | 100BASE-TX | 802.3u | Copper, 100m |
+| 1000Mbps | Gigabit Ethernet | 1000BASE-LX | 802.3z | Fibre, 5000m |
+| 1000Mbps | Gigabit Ethernet | 1000BASE-T | 802.3ab | Copper, 100m |
+| 10Gbps | 10 Gig Ethernet | 10GBASE-T | 802.3an | Copper, 100m |
 
 Ethernet frames use the same format for the header and trailer no matter the speed or type of cable (UTP/fibre optic) (Ethernet is a standard, not a specific cable).
 
@@ -81,14 +81,14 @@ Cisco switches have *auto-mdix* which if the wrong cable is used, it changes it'
 
 <div style="text-align: center">
     <br>
-    <img src="images/sm-fibre.png" width="450px" alt="Transmision on Singlemode Fibre with Laser Transmitter">
+    <img src="images/sm-fibre.png" width="450px" alt="Transmission on Singlemode Fibre with Laser Transmitter">
     <p>Transmission on Singlemode Fibre with Laser Transmitter</p>
     <br>
 </div>
 
 <div style="text-align: center">
     <br>
-    <img src="images/fibre-cables.png" width="450px" alt="Transmision on Singlemode Fibre with Laser Transmitter">
+    <img src="images/fibre-cables.png" width="450px" alt="Transmission on Singlemode Fibre with Laser Transmitter">
     <p>Two fibre cables with Tx (transmit) connected to Rx (receive)</p>
     <br>
 </div>
@@ -104,7 +104,7 @@ Cisco switches have *auto-mdix* which if the wrong cable is used, it changes it'
 
 ### UTP vs MM vs SM
 
-| Criteria | UTP | Mutlimode | Single-Mode |
+| Criteria | UTP | Multimode | Single-Mode |
 | --- | --- | --- | --- |
 | Relative cost of cabling | Low | Medium | Medium |
 | Relative cost of a switch port | Low | Medium | High |

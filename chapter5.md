@@ -20,7 +20,7 @@ Ports are named based on their fasted speed and are autonegotiated, i.e. 10/100/
 
 Switches forward frames within VLANs, frame received from a port in VLAN 1 only is forwarded to ports on VLAN 1.
 
-Switches act like a host for IP, they need a defalt gateway.
+Switches act like a host for IP, they need a default gateway.
 
 Reset config of switch:
 ```
@@ -87,7 +87,7 @@ STP causes each port on a switch to be in blocking (can't forward) or forwarding
 
 `show interfaces f0/1 counters` lists total amount of incoming and outgoing frames.
 
-Filter entres in the MAC address table by:
+Filter entries in the MAC address table by:
 * MAC address - `show mac address-table dynamic address 0200.1111.1111`
 * Switch port - `show mac address-table dynamic interface fastEthernet 0/1`
 * VLAN - `show mac-address table dynamic vlan 1`

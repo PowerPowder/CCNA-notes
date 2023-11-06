@@ -10,7 +10,7 @@
 * **user mode**: used for nondisruptive EXEC commands, like looking at current status
 * **configuration mode**: used for config commands that are added to running config file
 * **startup-config file**: sits in NVRAM, holds config file that's loaded into RAM on reload or power on
-* **running-config file**: sits in RAM, holds currently used config, updates dynaically
+* **running-config file**: sits in RAM, holds currently used config, updates dynamically
 
 
 ### Cisco Catalyst Switches

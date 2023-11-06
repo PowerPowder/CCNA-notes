@@ -47,8 +47,8 @@ Autonegotiation enabled on one side and speed/duplex is set on the other, the li
 Duplex mismatch: two nodes have different duplex modes configured, will be still listed as up/up.
 
 If no response is received to autonegotiate, switches set (IEEE rules):
-* Speed - sense the speed (cisco switch feature), otherwise use slowest speed (usually 10Mpbs)
-* Duplex - if speed is 10Mbps or 100Mpbs use half duplex otherwise use full duplex.
+* Speed - sense the speed (cisco switch feature), otherwise use slowest speed (usually 10Mbps)
+* Duplex - if speed is 10Mbps or 100Mbps use half duplex otherwise use full duplex.
 
 <div style="text-align: center">
     <br>
