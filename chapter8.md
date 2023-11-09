@@ -66,11 +66,26 @@
 
 ### Creating VLANs and Assigning Access VLANs to an Interface
 
+```
+vlan <vlan-id>
+name <name>                         ! becomes VLANZZZZ if no name is specified
+interface <type> <number>           ! can use range of ports
+switchport access vlan <id-number>
+switchport mode access              ! optional - set port to access mode, not to trunk
+```
+
 #### VLAN Configuration Example 1: Full VLAN Configuration
+
+`show vlan brief` - list all vlans with status and ports
+
+`show vlan id <id-number>` - outputs that vlan's status, ports, type, SAID, MTU, etc.
 
 #### VLAN Configuration Example 2: Shorter VLAN Configuration
 
 ### VLAN Trunking Protocol
+
+* VTP advertises all vlans in one switch to all other switches.
+* Most organisations disable it, use `vtp mode transparent` to disable it.
 
 ### VLAN Trunking Configuration
 
