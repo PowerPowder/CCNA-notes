@@ -2,21 +2,21 @@
 
 ## Terms
 
-* **802.1Q**: 
-* **Trunk**: 
-* **Trunking Administrative Mode**: 
-* **Trunking Operational Mode**: 
-* **VLAN**: 
-* **VTP**: 
-* **VTP Transparent Mode**: 
-* **Layer 3 Switch**: 
-* **Access Interface**: 
-* **Trunk Interface**: 
-* **Data VLAN**: 
-* **Voice VLAN**: 
-* **Native VLAN**: 
-* **Default VLAN**: 
-* **Static Access Interface**: 
+* **802.1Q**: protocol for VLAN trunking and RSTP.
+* **Trunk**: VLAN headers are added to segments which identify the VLAN it belongs to
+* **Trunking Administrative Mode**: configure the trunk setting on a switch
+* **Trunking Operational Mode**: how VLAN trunking is performing on a switch interface
+* **VLAN**: devices grouped into a single broadcast domain across switches in a LAN
+* **VTP**: protocol that communicates information about VLANs (ID and name)
+* **VTP Transparent Mode**: VTP can configure VLANs but not tell other switches 
+* **Layer 3 Switch**: LAN switch that has layer 3 functionalities
+* **Access Interface**: switch interface connected to end user device, does not use trunking
+* **Trunk Interface**: switch interface configured so that it uses VLAN trunking
+* **Data VLAN**: VLAN used by devices connected through Ethernet (PCs and switches)
+* **Voice VLAN**: VLAN used by IP phones, switch passes on VLAN ID to attach a PC to a IP phone
+* **Native VLAN**: the one VLAN ID on a VLAN trunk forwarded without 802.1Q header
+* **Default VLAN**: generally VLAN 1, ports assigned this VLAN act as an access port
+* **Static Access Interface**: manually assigning VLANs through static configuration
 
 ## VLAN Concepts
 
