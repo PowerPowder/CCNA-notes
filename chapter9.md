@@ -164,8 +164,31 @@
 
 ### RSTP States and Processes
 
-### RSTP and the Backup (Designated)
+| Function | STP State | RSTP State |
+| --- | --- | --- |
+| Port is administratively disabled | Disabled | Discarding |
+| Stable state that ignores sending/receiving frames | Blocking | Discarding |
+| Temporary state without MAC learning and without forwarding | Listening | Not used |
+| Temporary state with MAC learning and without forwarding | Learning | Learning |
+| Stable state that learns MACs and forwards frames | Forwarding | Forwarding |
+
+### RSTP and the Backup (Designated) Port Role
+
+* A backup port is an alternative designated port, only used in hubs.
 
 ### RSTP Port Types
 
+* Point-to-point port - switch connected to another switch
+* Edge port - switch connected to endpoint device (PC)
+* Shared port - switch connected to a hub
+
+<div style="text-align: center">
+    <img src="images/rstp-port-types.png" width="400px" alt="RSTP link types">
+    <p>RSTP link types</p>
+</div>
+
 ### Optional STP Features
+
+* EtherChannel - bundle two links together and STP treats it as one link
+* PortFast - skip listening/learning states, used for endpoint devices for assigning a designated port
+* BPDU Guard - disables a port if BPDUs are received on it
