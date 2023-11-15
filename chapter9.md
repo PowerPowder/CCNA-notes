@@ -117,15 +117,48 @@
 
 | Timer | Default Value | Description |
 | --- | --- | --- |
-| Hello | 2 seconds | Hellos created by root |
+| Hello | 2 seconds | Time between Hellos created by root |
 | MaxAge | 10 times Hello | Wait time after not hearing Hellos |
-| Forward delay | 15 seconds | ... |
+| Forward delay | 15 seconds | Time after changing from blocking to forwarding |
 
 ### Changing Interface States with STP
+
+* roles: root port, designated port
+* states: forwarding, blocking
+* changing blocked to forwarding ports are put through two extra states (both timers are forward delay):
+    1. Listening - does not forward, removes unused MAC table entries
+    2. Learning - does not forward, learns MAC addresses received on interface
+* blocking -> listening -> learning -> forwarding
+
+| State | Forwards Frames | Learns MACs from frames | Transitory/Stable State |
+| --- | --- | --- | --- |
+| Blocking | No | No | Stable |
+| Listening | No | No | Transitory |
+| Learning | No | Yes | Transitory |
+| Forwarding | Yes | Yes | Stable |
+| Disabled | No | No | Stable |
 
 ## RSTP Concepts
 
 ### Comparing STP and RSTP
+
+* RSTP and STP both:
+    * elect root switch
+    * select root ports
+    * elect designated ports
+    * place each port in forwarding/blocked states
+* RSTP adds:
+    * can replace root port without waiting
+    * can replace designated port without waiting
+    * lowers wait times when RSTP waits for timers
+
+| Port Role | Function |
+| --- | --- |
+| Root port | Port that begins a nonroot switch's best path to the root |
+| Alternate port | Port that replaces the root port when the root port fails |
+| Designated port | Switch port designated to forward onto a collision domain |
+| Backup port | Port that replaces a designated port when a designated port fails |
+| Disabled port | Port that is administratively disabled |
 
 ### RSTP and the Alternate (Root) Port
 
