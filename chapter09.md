@@ -60,10 +60,10 @@
 | Each LAN's designated port | Forwarding | Switch forwarding the Hello with lowest root<br>cost is designated switch |
 | All other working ports | Blocking | Port cannot forward/receive user frames |
 
-#### The STP Bridge ID and Hello BPDU
+#### The STP Bridge ID (Prioriy + MAC) and Hello BPDU
 
 * Hello BPDU (bridge protocol data unit) is used to exchange info with other switches and has fields:
-    * Root bridge ID 
+    * Root bridge ID
     * Sender's bridge ID 
     * Sender's root cost 
     * Timer values on root switch - Hello, MaxAge, forward delay timers
@@ -189,6 +189,6 @@
 
 ### Optional STP Features
 
-* EtherChannel - bundle two links together and STP treats it as one link
+* EtherChannel - bundle links together and STP treats it as one link
 * PortFast - skip listening/learning states, used for endpoint devices for assigning a designated port
 * BPDU Guard - disables a port if BPDUs are received on it
